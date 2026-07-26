@@ -23,7 +23,7 @@ interface ChromeExtensionTabProps {
 }
 
 export const ChromeExtensionTab: React.FC<ChromeExtensionTabProps> = ({ appData }) => {
-  const [activeCodeFile, setActiveCodeFile] = useState<'manifest' | 'content' | 'popupHtml' | 'popupJs' | 'popupCss' | 'background'>('manifest');
+  const [activeCodeFile, setActiveCodeFile] = useState<'manifest' | 'content' | 'popupHtml' | 'popupJs' | 'background' | 'sampleResume' | 'sampleTranscript'>('manifest');
   const [copied, setCopied] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [simulatedPortal, setSimulatedPortal] = useState<'uc' | 'commonapp'>('uc');
@@ -45,7 +45,7 @@ export const ChromeExtensionTab: React.FC<ChromeExtensionTabProps> = ({ appData 
   const [isExtensionPopupOpen, setIsExtensionPopupOpen] = useState(true);
   const [autofillSuccessMessage, setAutofillSuccessMessage] = useState<string | null>(null);
 
-  const extensionFiles = getExtensionFiles(appData);
+  const extensionFiles = getExtensionFiles();
 
   const handleDownload = async () => {
     setIsDownloading(true);
@@ -128,10 +128,12 @@ export const ChromeExtensionTab: React.FC<ChromeExtensionTabProps> = ({ appData 
         return extensionFiles.popupHtml;
       case 'popupJs':
         return extensionFiles.popupJs;
-      case 'popupCss':
-        return extensionFiles.popupCss;
       case 'background':
         return extensionFiles.backgroundJs;
+      case 'sampleResume':
+        return extensionFiles.sampleResume;
+      case 'sampleTranscript':
+        return extensionFiles.sampleTranscript;
       default:
         return '';
     }
@@ -151,16 +153,16 @@ export const ChromeExtensionTab: React.FC<ChromeExtensionTabProps> = ({ appData 
           <div className="flex flex-wrap items-center gap-2">
             <div className="inline-flex items-center space-x-2 bg-[#10b981] text-black px-3 py-1 text-[11px] font-bold uppercase tracking-widest">
               <Chrome className="w-3.5 h-3.5" />
-              <span>Chrome Extension Manifest V3</span>
+              <span>Chrome Extension Manifest V3 · AI-Powered</span>
             </div>
           </div>
 
           <h2 className="font-serif italic text-3xl sm:text-4xl font-bold tracking-tight">
-            Autofill College Applications in Chrome
+            UC App Autofill — Powered by Gemma 4
           </h2>
 
           <p className="text-sm text-gray-300 leading-relaxed font-sans">
-            Transform your Collegeify dossier into a high-powered Chrome Extension. Automatically detect form fields on Common App, UC Application, Coalition App, ApplyTexas, or any university portal and autofill your credentials, grades, and essays in seconds.
+            A standalone Chrome Extension purpose-built for the University of California application. Import a resume and transcript, review the extracted profile, then let Gemma 4 (with a built-in local mapper as a fallback) map your details onto the UC portal's visible fields — including UC-specific PIQs and activity sections.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-3">
@@ -236,7 +238,7 @@ export const ChromeExtensionTab: React.FC<ChromeExtensionTabProps> = ({ appData 
         </div>
 
         <p className="px-6 pt-4 text-xs text-[#1A1A1A]/70">
-          Try the live Chrome extension right here on the <strong>{simulatedPortal === 'uc' ? 'University of California (UC) Application Portal' : 'Common Application Portal'}</strong>! Click the <strong>Collegeify Extension Icon</strong> in the simulated browser toolbar or click <strong>Autofill Page Now</strong>.
+          A conceptual preview of dossier-driven autofill on the <strong>{simulatedPortal === 'uc' ? 'University of California (UC) Application Portal' : 'Common Application Portal'}</strong>. Click the <strong>Collegeify Extension Icon</strong> in the simulated browser toolbar or click <strong>Autofill Page Now</strong>. The real downloadable extension (below) targets the UC Application specifically and uses its own resume/transcript import flow rather than this dossier.
         </p>
 
         {/* Simulated Chrome Browser Wrapper */}
@@ -558,7 +560,7 @@ export const ChromeExtensionTab: React.FC<ChromeExtensionTabProps> = ({ appData 
           <div className="flex items-center space-x-2">
             <Code2 className="w-5 h-5 text-emerald-400" />
             <h3 className="font-serif italic text-lg font-bold">
-              Chrome Extension Codebase (Manifest V3)
+              UC App Autofill — Source Code (Manifest V3)
             </h3>
           </div>
 
@@ -618,17 +620,6 @@ export const ChromeExtensionTab: React.FC<ChromeExtensionTabProps> = ({ appData 
           </button>
 
           <button
-            onClick={() => setActiveCodeFile('popupCss')}
-            className={`px-3 py-2 text-xs font-mono font-bold border-t border-x transition-all ${
-              activeCodeFile === 'popupCss'
-                ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-                : 'bg-white text-[#1A1A1A]/70 border-[#1A1A1A] hover:bg-[#EFECE6]'
-            }`}
-          >
-            popup.css
-          </button>
-
-          <button
             onClick={() => setActiveCodeFile('background')}
             className={`px-3 py-2 text-xs font-mono font-bold border-t border-x transition-all ${
               activeCodeFile === 'background'
@@ -636,7 +627,29 @@ export const ChromeExtensionTab: React.FC<ChromeExtensionTabProps> = ({ appData 
                 : 'bg-white text-[#1A1A1A]/70 border-[#1A1A1A] hover:bg-[#EFECE6]'
             }`}
           >
-            background.js
+            background.js (Gemma AI)
+          </button>
+
+          <button
+            onClick={() => setActiveCodeFile('sampleResume')}
+            className={`px-3 py-2 text-xs font-mono font-bold border-t border-x transition-all ${
+              activeCodeFile === 'sampleResume'
+                ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
+                : 'bg-white text-[#1A1A1A]/70 border-[#1A1A1A] hover:bg-[#EFECE6]'
+            }`}
+          >
+            sample-resume.txt
+          </button>
+
+          <button
+            onClick={() => setActiveCodeFile('sampleTranscript')}
+            className={`px-3 py-2 text-xs font-mono font-bold border-t border-x transition-all ${
+              activeCodeFile === 'sampleTranscript'
+                ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
+                : 'bg-white text-[#1A1A1A]/70 border-[#1A1A1A] hover:bg-[#EFECE6]'
+            }`}
+          >
+            sample-transcript.txt
           </button>
         </div>
 
