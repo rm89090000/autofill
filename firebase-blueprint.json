@@ -1,0 +1,33 @@
+{
+  "entities": {
+    "dossiers": {
+      "title": "Application Dossiers",
+      "description": "College application records including personal details, essays, activities, honors, handwriting calibration, and AI feedback.",
+      "properties": {
+        "userId": { "type": "string", "description": "User ID of the document owner" },
+        "title": { "type": "string", "description": "Dossier title e.g. Alex Rivera Common App" },
+        "applicantName": { "type": "string", "description": "Full name of applicant" },
+        "email": { "type": "string", "description": "Contact email" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "address": { "type": "string", "description": "Street address" },
+        "dob": { "type": "string", "description": "Date of birth" },
+        "highSchool": { "type": "string", "description": "High school name" },
+        "gpa": { "type": "string", "description": "GPA" },
+        "testScores": { "type": "string", "description": "Test scores" },
+        "intendedMajor": { "type": "string", "description": "Intended major" },
+        "targetColleges": { "type": "array", "items": { "type": "string" }, "description": "List of target colleges" },
+        "personalStatementPrompt": { "type": "string", "description": "Personal statement prompt" },
+        "personalStatement": { "type": "string", "description": "Personal statement essay body" },
+        "supplementalEssay1Prompt": { "type": "string", "description": "Supplemental essay prompt" },
+        "supplementalEssay1": { "type": "string", "description": "Supplemental essay body" },
+        "activities": { "type": "array", "items": { "type": "object" }, "description": "Array of activities" },
+        "honors": { "type": "array", "items": { "type": "object" }, "description": "Array of academic honors" },
+        "handwritingStyle": { "type": "object", "description": "Handwriting style calibration data" },
+        "analysis": { "type": "object", "description": "Saved AI admissions analysis result" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "description": "Last updated timestamp" }
+      },
+      "required": ["userId", "applicantName"]
+    }
+  }
+}

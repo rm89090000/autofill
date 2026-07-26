@@ -1,0 +1,6 @@
+{
+  "name": "Collegeify",
+  "description": "Upload college applications, get detailed AI feedback on essays and activities, and autofill application forms rendered in your custom handwriting style.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
