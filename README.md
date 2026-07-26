@@ -1,1 +1,1 @@
-
+The users can upload their extracurriculars, essays,manuscripts, and resumes, and essays. Based on what they upload, the Gemma ai gives feedback. I used the Gemma api key to do that. It also gives a score to based on how good the essay is and how they can revise. I used firebase to store previous applications that the user creates. I deployed it on Vercel. It also has a chrome extension which autofills college applications. 
