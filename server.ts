@@ -1,9 +1,12 @@
 import express from "express";
+import os from "os";
 import path from "path";
 import { GoogleGenAI, Type } from "@google/genai";
 import dotenv from "dotenv";
 
-dotenv.config();
+// Loaded from outside the project directory so it never appears in file
+// pickers/uploads scoped to this folder (e.g. Vercel envs cover production).
+dotenv.config({ path: path.join(os.homedir(), ".config", "autofill", ".env") });
 
 const app = express();
 const PORT = 3000;
